@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+
+import { ShotgunProvider } from "./context/ShotgunContext";
+import DealerTable from "./components/DealerTable";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ShotgunProvider>
+      <View style={styles.cont}>
+        <DealerTable />
+      </View>
+    </ShotgunProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  cont: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
