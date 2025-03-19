@@ -10,19 +10,35 @@ export const ShotgunProvider = ({ children }) => {
   const [message, setMessage] = useState("");
 
   const loadShotgun = () => {
-    const shellCount = Math.floor(Math.random() * (8 - 2 + 1)) + 2;
+    //Holy shit I got all live rounds while testing it
+    // const shellCount = Math.floor(Math.random() * (8 - 2 + 1)) + 2;
+    // const newShells = Array.from(
+    //   { length: shellCount },
+    //   () => Math.random() < 0.5
+    // );
+    let shellCount = Math.floor(Math.random() * (8 - 2 + 1)) + 2;
+    if (shellCount === 2) {
+      shellCount = 3;
+    }
+
     const newShells = Array.from(
       { length: shellCount },
       () => Math.random() < 0.5
     );
+
+    if (!newShells.includes(false)) {
+      const blankIndex = Math.floor(Math.random() * newShells.length);
+      newShells[blankIndex] = false;
+    }
+
     setShells(newShells);
     setShotgunLoaded(true);
 
     const liveRounds = newShells.filter((shell) => shell).length;
-    const dudRounds = newShells.length - liveRounds;
+    const blankRounds = newShells.length - liveRounds;
 
     setMessage(
-      `Total rounds: ${newShells.length}, Live rounds: ${liveRounds}, Dud rounds: ${dudRounds}`
+      `Total rounds: ${newShells.length}, Live rounds: ${liveRounds}, blank rounds: ${blankRounds}`
     );
   };
 
@@ -50,7 +66,7 @@ export const ShotgunProvider = ({ children }) => {
         setMessage("The dealer is dead. You live another day...");
         setGameOver(true);
       } else {
-        setMessage("The shell is a dud...");
+        setMessage("The shell is a blank...");
         setCurrTurn("dealer");
       }
     }
@@ -86,7 +102,7 @@ export const ShotgunProvider = ({ children }) => {
         setMessage("The dealer is dead. You live another day...");
         setGameOver(true);
       } else {
-        setMessage("The round is a dud...");
+        setMessage("The round is a blank...");
         setCurrTurn("player");
       }
 
