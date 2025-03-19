@@ -124,7 +124,7 @@ export const ShotgunProvider = ({ children }) => {
             setGameOver(true);
           } else {
             setMessage("The dealer shot itself with a blank round...");
-            setCurrTurn("dealer");
+            dealerTurn();
           }
         }
 

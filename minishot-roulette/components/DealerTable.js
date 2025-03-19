@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { ShotgunContext } from "../context/ShotgunContext";
+import StyleBtn from "../ui/styleBtn";
 
 const DealerTable = () => {
   const {
@@ -19,17 +20,17 @@ const DealerTable = () => {
       <Text style={styles.message}>{message}</Text>
 
       {!shotgunLoaded && !gameOver && (
-        <Button title="Load Shotgun" onPress={loadShotgun} />
+        <StyleBtn title="Load Shotgun" onPress={loadShotgun} />
       )}
 
       {shotgunLoaded && currTurn === "player" && !gameOver && (
         <View style={styles.buttonContainer}>
-          <Button title="Shoot Self" onPress={() => shoot("player")} />
-          <Button title="Shoot Dealer" onPress={() => shoot("dealer")} />
+          <StyleBtn title="Shoot Self" onPress={() => shoot("player")} />
+          <StyleBtn title="Shoot Dealer" onPress={() => shoot("dealer")} />
         </View>
       )}
 
-      {gameOver && <Button title="Reset Game" onPress={resetGame} />}
+      {gameOver && <StyleBtn title="Reset Game" onPress={resetGame} />}
     </View>
   );
 };
