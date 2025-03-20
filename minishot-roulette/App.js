@@ -15,7 +15,7 @@ export default function App() {
     if (screen === "game") {
       return (
         <ShotgunProvider>
-          <DealerTable playerName={playerName} />
+          <DealerTable playerName={playerName} setScreen={setScreen} />
         </ShotgunProvider>
       );
     } else {

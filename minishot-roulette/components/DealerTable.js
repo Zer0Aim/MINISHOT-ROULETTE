@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { ShotgunContext } from "../context/ShotgunContext";
 import StyleBtn from "../ui/styleBtn";
 
-const DealerTable = ({ playerName }) => {
+const DealerTable = ({ playerName, setScreen }) => {
   const {
     currTurn,
     shotgunLoaded,
@@ -22,6 +22,11 @@ const DealerTable = ({ playerName }) => {
     }
   };
 
+  const handleExit = () => {
+    resetGame();
+    setScreen("start");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{displayTurn()}</Text>
@@ -38,7 +43,12 @@ const DealerTable = ({ playerName }) => {
         </View>
       )}
 
-      {gameOver && <StyleBtn title="Reset Game" onPress={resetGame} />}
+      {gameOver && (
+        <View>
+          <StyleBtn title="Reset Game" onPress={resetGame} />
+          <StyleBtn title="Exit to Menu" onPress={handleExit} />
+        </View>
+      )}
     </View>
   );
 };
@@ -48,13 +58,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 20,
+    fontSize: 28,
+    color: "white",
+    marginBottom: 10,
+    fontFamily: "Impact",
     marginBottom: 10,
   },
   message: {
-    fontSize: 16,
-    marginBottom: 20,
-    textAlign: "center",
+    fontSize: 18,
+    color: "white",
+    marginBottom: 10,
+    fontFamily: "Impact",
   },
   buttonContainer: {
     flexDirection: "row",

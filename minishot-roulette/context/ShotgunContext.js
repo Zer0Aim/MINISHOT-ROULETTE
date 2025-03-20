@@ -39,7 +39,7 @@ export const ShotgunProvider = ({ children }) => {
     const blankRounds = newShells.length - liveRounds;
 
     setMessage(
-      `Total rounds: ${newShells.length}, Live rounds: ${liveRounds}, blank rounds: ${blankRounds}`
+      `Total rounds: ${newShells.length}\n Live rounds: ${liveRounds}\n blank rounds: ${blankRounds}`
     );
   };
 
@@ -132,7 +132,7 @@ export const ShotgunProvider = ({ children }) => {
           setMessage("The chamber is empty...");
           resetRound();
         }
-      }, 5000);
+      }, 1500);
 
       //   if (isLive) {
       //     setMessage("The dealer is dead. You live another day...");
