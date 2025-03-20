@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const ShotgunContext = createContext();
 
@@ -9,6 +9,31 @@ export const ShotgunProvider = ({ children }) => {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState("");
   const [dealerChoice, setDealerChoice] = useState("");
+  const [isDealerTurn, setIsDealerTurn] = useState(false);
+
+  useEffect(() => {
+    if (currTurn === "dealer" && !gameOver && !isDealerTurn) {
+      setIsDealerTurn(true);
+      const dealerTurnTimeout = setTimeout(() => {
+        if (gameOver) {
+          setIsDealerTurn(false);
+          return;
+        }
+        if (shells.length === 0) {
+          setMessage("The chamber is empty...");
+          if (!gameOver) {
+            resetRound();
+          }
+          setIsDealerTurn(true);
+          return;
+        }
+
+        const isLive = shells[0];
+        const remainingShells = shells.slice(1);
+        setShells(remainingShells);
+      });
+    }
+  });
 
   const loadShotgun = () => {
     //Holy shit I got all live rounds while testing it
@@ -83,71 +108,71 @@ export const ShotgunProvider = ({ children }) => {
     }
   };
 
-  const dealerTurn = () => {
-    setTimeout(() => {
-      if (gameOver) {
-        return;
-      }
-      if (shells.length === 0) {
-        setMessage("The chamber is empty...");
-        if (!gameOver) {
-          resetRound();
-        }
-        return;
-      }
+  // const dealerTurn = () => {
+  //   setTimeout(() => {
+  //     if (gameOver) {
+  //       return;
+  //     }
+  //     if (shells.length === 0) {
+  //       setMessage("The chamber is empty...");
+  //       if (!gameOver) {
+  //         resetRound();
+  //       }
+  //       return;
+  //     }
 
-      const isLive = shells[0];
-      const remainingShells = shells.slice(1);
-      setShells(remainingShells);
+  //     const isLive = shells[0];
+  //     const remainingShells = shells.slice(1);
+  //     setShells(remainingShells);
 
-      const choice = Math.random() < 0.5 ? "player" : "dealer";
-      setDealerChoice(
-        `Dealer shoots ${choice === `player` ? `you` : `itself`}`
-      );
-      setMessage(
-        choice === "player" ? "Dealer shoots you" : "Dealer shoots itself"
-      );
+  //     const choice = Math.random() < 0.5 ? "player" : "dealer";
+  //     setDealerChoice(
+  //       `Dealer shoots ${choice === `player` ? `you` : `itself`}`
+  //     );
+  //     setMessage(
+  //       choice === "player" ? "Dealer shoots you" : "Dealer shoots itself"
+  //     );
 
-      setTimeout(() => {
-        setDealerChoice("");
-        if (choice === "player") {
-          if (isLive) {
-            setMessage("You are dead.");
-            setGameOver(true);
-          } else {
-            setMessage("The dealer shot you with a blank...");
-            setCurrTurn("player");
-          }
-        } else if (choice === "dealer") {
-          if (isLive) {
-            setMessage("The dealer shot itself with a live round.");
-            setGameOver(true);
-          } else {
-            setMessage("The dealer shot itself with a blank round...");
-            dealerTurn();
-          }
-        }
+  //     setTimeout(() => {
+  //       setDealerChoice("");
+  //       if (choice === "player") {
+  //         if (isLive) {
+  //           setMessage("You are dead.");
+  //           setGameOver(true);
+  //         } else {
+  //           setMessage("The dealer shot you with a blank...");
+  //           setCurrTurn("player");
+  //         }
+  //       } else if (choice === "dealer") {
+  //         if (isLive) {
+  //           setMessage("The dealer shot itself with a live round.");
+  //           setGameOver(true);
+  //         } else {
+  //           setMessage("The dealer shot itself with a blank round...");
+  //           dealerTurn();
+  //         }
+  //       }
 
-        if (shells.length === 0 && !gameOver) {
-          setMessage("The chamber is empty...");
-          resetRound();
-        }
-      }, 1500);
+  //       if (shells.length === 0 && !gameOver) {
+  //         setMessage("The chamber is empty...");
+  //         resetRound();
+  //       }
+  //     }, 1500);
 
-      //   if (isLive) {
-      //     setMessage("The dealer is dead. You live another day...");
-      //     setGameOver(true);
-      //   } else {
-      //     setMessage("The round is a blank...");
-      //     setCurrTurn("player");
-      //   }
+  //     //   if (isLive) {
+  //     //     setMessage("The dealer is dead. You live another day...");
+  //     //     setGameOver(true);
+  //     //   } else {
+  //     //     setMessage("The round is a blank...");
+  //     //     setCurrTurn("player");
+  //     //   }
 
-      //   if (shells.length === 0 && !gameOver) {
-      //     setMessage("The chamber is empty...");
-      //     resetRound();
-      //   }
-    }, 1500);
-  };
+  //     //   if (shells.length === 0 && !gameOver) {
+  //     //     setMessage("The chamber is empty...");
+  //     //     resetRound();
+  //     //   }
+  //   }, 1500);
+  // };
 
   const resetGame = () => {
     setShells([]);
