@@ -6,30 +6,43 @@ A (very) stripped down version of <a href="https://store.steampowered.com/app/28
 
 1. Start Screen
 
-<img width="449" alt="Start screen" src="https://github.com/Zer0Aim/moody/blob/main/screenshots/startscreen.png" />
+<img width="449" alt="Start screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/1-start.png" />
 
-2. Entry screen: Users can nput their thoughts as well as select ther mood.
+2. Player Name Selection
 
-<img width="449" alt="Entry input screen" src="https://github.com/Zer0Aim/moody/blob/main/screenshots/entryscreen.png" />
+<img width="449" alt="Player Name Selection" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/2-playername.png" />
 
-3. Start screen with entries
+3. Shotgun Loading Screen (The start game )
 
-<img width="449" alt="Start screen with entries" src="https://github.com/Zer0Aim/moody/blob/main/screenshots/startwithentry.png" />
+<img width="449" alt="Shotgun Load Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/3-shotgunload.png" />
 
-4. View entry screen
+4. Main Game Screen
 
-<img width="449" alt="View entry screen" src="https://github.com/Zer0Aim/moody/blob/main/screenshots/viewentryscreen.png" />
+<img width="449" alt="Main Game Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/4-game-screen.png" />
 
-5. Edit entry screen
+5. Shoot Self Screen (blank round)
 
-<img width="449" alt="Ediit entry screen" src="https://github.com/Zer0Aim/moody/blob/main/screenshots/editentryscreen.png" />
+<img width="449" alt="Main Game Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/5-shootself.png" />
+
+6. Shoot Dealer Screen (live round)
+
+<img width="449" alt="Main Game Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/6-dealerdead.png" />
+
+7. Dealer's Turn
+
+<img width="449" alt="Main Game Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/7-dealerturn.png" />
+
+8. Dealer's Failed turn
+
+<img width="449" alt="Main Game Screen" src="https://github.com/Zer0Aim/MINISHOT-ROULETTE/blob/main/screenshots/8-dealerfailed.png" />
 
 # Setup
 
 1. Download the zip folder and open it on VS Code
-2. Open a new terminal on VS Code and run `npm i`
-3. After installing the node modules, run `npx expo start` to run the app
-4. Run the app on your preferred device (Android Studio emulator, Expo Go, etc.)
+2. Open a new terminal on VS Code and run `cd minishot-roulette`
+3. run `npm i`
+4. After installing the node modules, run `npx expo start` to run the app
+5. Run the app on your preferred device (Android Studio emulator, Expo Go, etc.)
 
 # Built with
 
