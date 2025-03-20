@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { ShotgunContext } from "../context/ShotgunContext";
 import StyleBtn from "../ui/styleBtn";
 
-const DealerTable = () => {
+const DealerTable = ({ playerName }) => {
   const {
     currTurn,
     shotgunLoaded,
@@ -14,9 +14,17 @@ const DealerTable = () => {
     resetGame,
   } = useContext(ShotgunContext);
 
+  const displayTurn = () => {
+    if (currTurn === "player") {
+      return `${playerName}'s turn.`;
+    } else {
+      return "Dealer's turn.";
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Turn: {currTurn}</Text>
+      <Text style={styles.text}>{displayTurn()}</Text>
       <Text style={styles.message}>{message}</Text>
 
       {!shotgunLoaded && !gameOver && (

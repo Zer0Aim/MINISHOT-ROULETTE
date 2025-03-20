@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { BlurView } from "expo-blur";
 
 import { ShotgunProvider } from "./context/ShotgunContext";
 import DealerTable from "./components/DealerTable";
 
+import StartScreen from "./components/StartScreen";
+
 export default function App() {
+  const [screen, setScreen] = useState("start");
+  const [playerName, setPlayerName] = useState("");
+
+  const renderScreen = () => {
+    if (screen === "game") {
+      return (
+        <ShotgunProvider>
+          <DealerTable playerName={playerName} />
+        </ShotgunProvider>
+      );
+    } else {
+      return (
+        <StartScreen
+          screen={screen}
+          setScreen={setScreen}
+          playerName={playerName}
+          setPlayerName={setPlayerName}
+        />
+      );
+    }
+  };
+
   return (
-    <ShotgunProvider>
-      <ImageBackground
-        source={require("./assets/images/background.png")}
-        style={styles.background}
-      >
-        <BlurView intensity={80} style={styles.blurContainer}>
-          <View style={styles.container}>
-            <DealerTable />
-          </View>
-        </BlurView>
-      </ImageBackground>
-    </ShotgunProvider>
+    <ImageBackground
+      source={require("./assets/images/background.png")}
+      style={styles.background}
+    >
+      <BlurView intensity={80} style={styles.blurContainer}>
+        <View style={styles.cont}>{renderScreen()}</View>
+      </BlurView>
+    </ImageBackground>
   );
 }
 
