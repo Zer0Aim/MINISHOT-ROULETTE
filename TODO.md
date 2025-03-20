@@ -1,2 +1,1 @@
-- Group CSS to one file for easier edit
-- Edit texts and UI
+- UI css
