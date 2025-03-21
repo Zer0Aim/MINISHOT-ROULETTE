@@ -12,6 +12,19 @@ const StartScreen = ({ screen, setScreen, playerName, setPlayerName }) => {
       alert("You can't be nameless...");
       return;
     }
+    if (
+      playerName === "Dealer" ||
+      playerName === "dealer" ||
+      playerName === "DEALER"
+    ) {
+      alert("You're not the dealer...");
+      return;
+    }
+
+    if (playerName === "God" || playerName === "god" || playerName === "GOD") {
+      alert("ERROR: Name unavailable.");
+      return;
+    }
     setScreen("game");
   };
 

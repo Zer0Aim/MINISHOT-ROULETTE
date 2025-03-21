@@ -31,9 +31,49 @@ export const ShotgunProvider = ({ children }) => {
         const isLive = shells[0];
         const remainingShells = shells.slice(1);
         setShells(remainingShells);
-      });
+
+        const choice = Math.random() < 0.5 ? "player" : "dealer";
+        setDealerChoice(
+          `Dealer shoots ${choice === `player` ? `you` : `itself`}`
+        );
+        setMessage(
+          choice === "player" ? "Dealer shoots you" : "Dealer shoots itself"
+        );
+
+        const choiceTimeout = setTimeout(() => {
+          setDealerChoice("");
+          if (choice === "player") {
+            if (isLive) {
+              setMessage("You are dead.");
+              setGameOver(true);
+            } else {
+              setMessage("The dealer shot you with a blank...");
+              setCurrTurn("player");
+            }
+          } else if (choice === "dealer") {
+            if (isLive) {
+              setMessage("The dealer shot itself with a live round.");
+              setGameOver(true);
+            } else {
+              setMessage("The dealer shot itself with a blank round...");
+              setCurrTurn("dealer");
+            }
+          }
+
+          if (shells.length === 0 && !gameOver) {
+            setMessage("The chamber is empty...");
+            resetRound();
+          }
+
+          setIsDealerTurn(false);
+        }, 2500);
+
+        return () => clearTimeout(choiceTimeout);
+      }, 1500);
+
+      return () => clearTimeout(dealerTurnTimeout);
     }
-  });
+  }, [currTurn, gameOver, shells]);
 
   const loadShotgun = () => {
     //Holy shit I got all live rounds while testing it
@@ -94,7 +134,7 @@ export const ShotgunProvider = ({ children }) => {
       } else {
         setMessage("The shell is a blank...");
         setCurrTurn("dealer");
-        dealerTurn();
+        //dealerTurn();
       }
     }
 
@@ -103,9 +143,9 @@ export const ShotgunProvider = ({ children }) => {
       resetRound();
     }
 
-    if ((currTurn === "dealer") & !gameOver) {
-      dealerTurn();
-    }
+    // if ((currTurn === "dealer") & !gameOver) {
+    //   dealerTurn();
+    // }
   };
 
   // const dealerTurn = () => {
