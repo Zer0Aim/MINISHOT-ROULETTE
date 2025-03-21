@@ -53,3 +53,4 @@ A (very) stripped down version of <a href="https://store.steampowered.com/app/28
 - reusable components
 - children prop
 - modals
+- useEffects
